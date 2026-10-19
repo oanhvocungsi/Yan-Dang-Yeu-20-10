@@ -5502,6 +5502,22 @@ body.question-scene-body { background: #000; }
 /* Let the old question actually fade out during the eye movement. */
 .share-finale-active .text-layer {opacity:0!important;visibility:visible!important;transition:opacity .8s ease!important;}
 .share-finale-active #text-13 {opacity:0!important;visibility:visible!important;transition:opacity .8s ease!important;}
+
+body.fallinglove-active .text-layer {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+body.fallinglove-active #tiny-reality-scene,
+body.fallinglove-active #khung-mat,
+body.fallinglove-active #tiny-sky,
+body.fallinglove-active #woman-scene {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
 @media(max-width:650px) {
  #share-flight-scene {justify-content:center;padding:22px 10px 35px;}
  .share-flight-heading {margin:0 0 10px;}
@@ -7248,8 +7264,55 @@ html.tiny-pc-beauty-v12 #uiverse-starfield #stars3 {
         text-shadow: 0 0 16px rgba(255, 107, 157, 0.8), 0 0 32px rgba(255, 182, 219, 0.5) !important;
         line-height: 1.5 !important;
       }
-      .reality-message {
-        text-shadow: 0 0 18px rgba(255, 107, 157, 0.9), 0 0 36px rgba(255, 140, 180, 0.6) !important;
+      /* Intro screen & 3D heart glowing wish typography matching Image 2 */
+      #intro-screen {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1002;
+        overflow: hidden;
+      }
+      #text-container {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        z-index: 1010;
+      }
+      .intro-glowing-wish {
+        max-width: 86vw;
+        padding: 0 20px;
+        text-align: center;
+        font-family: 'Mali', 'Courier Prime', cursive, sans-serif;
+        font-weight: 700;
+        font-size: clamp(22px, 3.8vw, 36px);
+        line-height: 1.5;
+        color: #ffffff;
+        text-shadow: 
+          0 0 10px rgba(255, 255, 255, 0.95),
+          0 0 24px rgba(255, 105, 180, 0.85),
+          0 0 42px rgba(255, 20, 147, 0.65),
+          0 0 60px rgba(255, 20, 147, 0.45);
+        transform: translateY(-28px);
+        opacity: 0;
+        filter: blur(3px);
+        transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
+        user-select: none;
+      }
+      .intro-glowing-wish.is-visible {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateY(-28px) scale(1);
+      }
+      .intro-glowing-wish.is-exiting {
+        opacity: 0;
+        filter: blur(6px);
+        transform: translateY(-38px) scale(1.06);
       }
     </style>
 
@@ -12164,7 +12227,7 @@ if(window.TINY_PERF && !window.TINY_PERF.mobile){
 
     <div
       id="app"
-      data-page='{"component": "views/home", "props": {"errors": {}, "name": "LoveGift", "quote": {"message": "Mong thế giới này luôn dịu dàng với cậu, như cách cậu mang lại niềm vui và sự ấm áp đến mọi người.", "author": "Gửi Cậu — Người Bạn Đáng Yêu Của Tớ 💕"}, "message": "", "client": {"fontName": "Mali", "color": "#ff6b9d", "messages": ["Chúc cậu một ngày 20/10 thật nhiều niềm vui và luôn tươi cười, rạng rỡ nhé 🌸", "Hãy luôn tự tin, yêu đời và tỏa sáng theo cách đặc biệt nhất của riêng cậu ✨", "Nụ cười của cậu rất dễ thương, mong cậu luôn giữ trọn nét hồn nhiên ấy ☀️", "Dù học tập hay cuộc sống có bận rộn, cũng nhớ luôn vui vẻ và chăm sóc bản thân nha 💖"], "music": "assets/music/giai-cuu-the-gioi.mp3", "images": ["assets/image/photo1.png", "assets/image/photo2.png", "assets/image/photo3.png", "assets/image/photo4.png", "assets/image/photo5.png"]}, "clientId": "/"}, "url": "/", "version": "", "clearHistory": false, "encryptHistory": false}'
+      data-page='{"component": "views/home", "props": {"errors": {}, "name": "LoveGift", "quote": {"message": "Mong thế giới này luôn dịu dàng với cậu, như cách cậu mang lại niềm vui và sự ấm áp đến mọi người.", "author": "Gửi Cậu — Người Bạn Đáng Yêu Của Tớ 💕"}, "message": "", "client": {"fontName": "Mali", "color": "#ff6b9d", "messages": ["Chúc cậu một ngày 20/10 thật nhiều niềm vui và luôn tươi cười, rạng rỡ nhé 🌸", "Hãy luôn tự tin, yêu đời và tỏa sáng theo cách đặc biệt nhất của riêng cậu ✨", "Nụ cười của cậu rất dễ thương, mong cậu luôn giữ trọn nét hồn nhiên ấy ☀️", "Dù học tập hay cuộc sống có bận rộn, cũng nhớ luôn vui vẻ và chăm sóc bản thân nha 💖"], "music": "assets/music/giai-cuu-the-gioi.mp3", "images": ["assets/image/photo1.png", "assets/image/photo2.png", "assets/image/photo3.png", "assets/image/photo4.png", "assets/image/photo5.png", "assets/image/photo6.png", "assets/image/photo7.png", "assets/image/photo8.jpg", "assets/image/photo9.jpg", "assets/image/photo10.png"]}, "clientId": "/"}, "url": "/", "version": "", "clearHistory": false, "encryptHistory": false}'
     ></div>
   </div><!-- /#love-rain-screen -->
 
@@ -12212,6 +12275,16 @@ if(window.TINY_PERF && !window.TINY_PERF.mobile){
       window.__fallingLoveTransitionStarted = true;
       console.log('✨ [Transition] Chuyển tiếp sang hoạt ảnh Falling Love...');
 
+      // Thêm class ngay lập tức để ẩn sạch mọi text layer cũ và chặn click cũ
+      document.body.classList.add('fallinglove-active');
+      document.body.classList.remove('share-finale-active');
+      try { canClick = false; } catch (_) {}
+      try { canClickReality = false; } catch (_) {}
+      document.querySelectorAll('.text-layer').forEach(t => {
+        t.classList.remove('hien-thi');
+        t.style.display = 'none';
+      });
+
       // 1. Đồng bộ nhạc của đoạn đầu chạy xuyên suốt, lặp vô tận
       const tinySoundtrack = document.getElementById('tiny-soundtrack');
       if (tinySoundtrack) {
@@ -12223,25 +12296,28 @@ if(window.TINY_PERF && !window.TINY_PERF.mobile){
       window.__useTinyAudioOnly = true;
       window.__introAudio = tinySoundtrack;
 
-      // 2. Mờ dần khung cảnh Tiny reality
+      // 2. Mờ dần và ẩn toàn bộ khung cảnh Tiny reality
       const realityScene = document.getElementById('tiny-reality-scene');
       const shareScene = document.getElementById('share-flight-scene');
       const tinySky = document.getElementById('tiny-sky');
       const khungMat = document.getElementById('khung-mat');
 
       if (realityScene) {
-        realityScene.style.transition = 'opacity 1.2s ease, transform 1.2s ease';
+        realityScene.style.display = 'none';
         realityScene.style.opacity = '0';
-        realityScene.style.transform = 'scale(1.08)';
       }
       if (shareScene) shareScene.style.display = 'none';
+      if (tinySky) tinySky.style.display = 'none';
+      if (khungMat) khungMat.style.display = 'none';
+
+      // Snoopy thu nhỏ lên góc trên
+      const snoopyActor = document.getElementById('snoopy-storyboard-actor');
+      if (snoopyActor) {
+        snoopyActor.classList.add('shrink-to-corner');
+      }
 
       setTimeout(() => {
         if (realityScene) realityScene.style.display = 'none';
-        if (tinySky) tinySky.style.display = 'none';
-        if (khungMat) khungMat.style.display = 'none';
-        document.body.classList.remove('share-finale-active');
-        document.body.classList.add('fallinglove-active');
 
         // 3. Hiện Falling Love container
         const flRoot = document.getElementById('fallinglove-root');
@@ -12276,10 +12352,15 @@ if(window.TINY_PERF && !window.TINY_PERF.mobile){
         const startWrap = document.getElementById('start-wrap');
         if (startWrap) startWrap.style.display = 'none';
 
-        // 6. Kích hoạt Animation hoa nở rực rỡ (Bó hoa bung nở rồi lan tỏa toàn màn hình)
-        // trước khi hiện dòng chữ 3D: "Gửi đến em — cô gái..."
+        // 6. Kích hoạt Animation hoa nở rực rỡ
         if (typeof window.startBloomingBouquetScene === 'function') {
           window.startBloomingBouquetScene(() => {
+            const bloom = document.getElementById('flower-bloom-screen');
+            if (bloom) {
+              bloom.style.transition = 'opacity 0.8s ease';
+              bloom.style.opacity = '0';
+              setTimeout(() => { bloom.style.display = 'none'; }, 800);
+            }
             window.__textStarted = true;
             window.dispatchEvent(new CustomEvent('__textStart'));
           });
@@ -12296,9 +12377,13 @@ if(window.TINY_PERF && !window.TINY_PERF.mobile){
   <!-- Falling Love Core Modules -->
   <script src="lib/app-config.js"></script>
   <script src="js/preview-storage.js"></script>
+  <script src="js/photo-data.js"></script>
   <script src="js/data-init.js"></script>
   <script src="js/shooting-stars.js"></script>
-  <script type="module" src="js/enhanced-effects.js"></script>
+  <script src="js/three.min.js"></script>
+  <script src="js/OrbitControls.js"></script>
+  <script src="js/enhanced-effects.js"></script>
+  <script src="js/love-rain-standalone.js"></script>
   <script src="js/start-button.js"></script>
   <script src="js/loading-manager.js"></script>
 
@@ -12333,7 +12418,12 @@ if(window.TINY_PERF && !window.TINY_PERF.mobile){
           "assets/image/photo2.png",
           "assets/image/photo3.png",
           "assets/image/photo4.png",
-          "assets/image/photo5.png"
+          "assets/image/photo5.png",
+          "assets/image/photo6.png",
+          "assets/image/photo7.png",
+          "assets/image/photo8.jpg",
+          "assets/image/photo9.jpg",
+          "assets/image/photo10.png"
         ];
         var photoUrls = defaultPhotos;
         if (window.LOVEGIFT_IMAGES && window.LOVEGIFT_IMAGES.length > 0) {
@@ -12355,28 +12445,13 @@ if(window.TINY_PERF && !window.TINY_PERF.mobile){
           })
         );
 
-        LoadingScreen.setMessage('Khởi tạo bầu trời ngàn sao...');
-        LoadingScreen.setProgress(75);
-
-        await Promise.all([
-          LoadingScreen.loadScript('js/loader.js'),
-          LoadingScreen.loadScript('js/starry-sky.js', true)
-        ]);
+        LoadingScreen.setMessage('Khởi tạo vũ trụ 3D và góc nhìn 360°...');
         LoadingScreen.setProgress(85);
 
-        LoadingScreen.setMessage('Chuẩn bị mưa tình yêu...');
-        await new Promise(function (resolve) {
-          var attempts = 0;
-          var checkTimer = setInterval(function () {
-            attempts++;
-            var app = document.getElementById('app');
-            var hasCanvas = app && app.querySelector('canvas');
-            if (hasCanvas || attempts >= 35) {
-              clearInterval(checkTimer);
-              resolve();
-            }
-          }, 100);
-        });
+        // Khởi động Standalone 3D Love Rain Engine với 360° rotation
+        if (typeof window.startStandaloneLoveRain === 'function') {
+          window.startStandaloneLoveRain();
+        }
 
         LoadingScreen.setProgress(100);
         LoadingScreen.setMessage('Món quà đã sẵn sàng! 💕');
@@ -12384,40 +12459,13 @@ if(window.TINY_PERF && !window.TINY_PERF.mobile){
 
         setTimeout(function () {
           LoadingScreen.hide();
-          showGestureGuide();
-        }, 350);
-
-        function showGestureGuide() {
-          if (document.getElementById('gesture-guide-360')) return;
-          var guide = document.createElement('div');
-          guide.id = 'gesture-guide-360';
-          guide.style.cssText = 'position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);z-index:9999;opacity:0;transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1);pointer-events:none;user-select:none;';
-          guide.innerHTML = '<div style="display:flex;align-items:center;gap:10px;padding:9px 20px;background:rgba(25,8,32,0.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1.5px solid rgba(255,182,218,0.6);border-radius:999px;box-shadow:0 8px 30px rgba(255,46,126,0.38);color:#fff0f7;font:600 13px/1.3 \'Mali\',\'Quicksand\',sans-serif;letter-spacing:0.3px;"><svg viewBox="0 0 48 48" style="width:26px;height:26px;flex-shrink:0;animation:guideRot 3.5s linear infinite;" fill="none"><path d="M24 8 C14 8 6 15 6 24 C6 30 10 36 16 38" stroke="#ff7ab6" stroke-width="3" stroke-linecap="round"/><path d="M12 40 L16 38 L14 34" fill="#ff7ab6"/><path d="M24 40 C34 40 42 33 42 24 C42 18 38 12 32 10" stroke="#ff7ab6" stroke-width="3" stroke-linecap="round"/><path d="M36 8 L32 10 L34 14" fill="#ff7ab6"/><circle cx="24" cy="24" r="5" fill="#ffffff"/></svg><span>Chạm & vuốt để xoay 360° • Cuộn/zoom để ngắm ngàn sao 💕</span></div><style>@keyframes guideRot{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}</style>';
-          document.body.appendChild(guide);
-
-          setTimeout(function() {
-            guide.style.opacity = '1';
-            guide.style.transform = 'translateX(-50%) translateY(0)';
-          }, 800);
-
-          var dismiss = function() {
-            guide.style.opacity = '0';
-            guide.style.transform = 'translateX(-50%) translateY(20px)';
-            ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(function(e) {
-              window.removeEventListener(e, dismiss);
-            });
-            setTimeout(function() {
-              if (guide && guide.parentNode) guide.parentNode.removeChild(guide);
-            }, 900);
-          };
-
-          ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(function(e) {
-            window.addEventListener(e, dismiss, { passive: true, once: true });
-          });
-        }
+        }, 400);
 
       } catch (err) {
         console.error('Lỗi khởi tạo Love Rain:', err);
+        if (typeof window.startStandaloneLoveRain === 'function') {
+          window.startStandaloneLoveRain();
+        }
         LoadingScreen.setProgress(100);
         setTimeout(function () {
           LoadingScreen.hide();

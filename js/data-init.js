@@ -57,13 +57,15 @@ function resolveMusicUrl(music) {
 // Export cho loader.js dùng chung
 window.resolveMusicUrl = resolveMusicUrl;
 
-const DEFAULT_IMAGES = [
-  'assets/image/photo1.png',
-  'assets/image/photo2.png',
-  'assets/image/photo3.png',
-  'assets/image/photo4.png',
-  'assets/image/photo5.png',
-];
+const DEFAULT_IMAGES = (typeof window !== 'undefined' && window.EMBEDDED_PHOTOS && window.EMBEDDED_PHOTOS.length > 0)
+  ? window.EMBEDDED_PHOTOS
+  : [
+      'assets/image/photo1.png',
+      'assets/image/photo2.png',
+      'assets/image/photo3.png',
+      'assets/image/photo4.png',
+      'assets/image/photo5.png',
+    ];
 
 /* ── Dữ liệu mặc định (fallback khi không có server) ────── */
 const DEFAULT = {

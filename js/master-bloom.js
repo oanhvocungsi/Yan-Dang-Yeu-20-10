@@ -266,7 +266,25 @@
 
     function startDissolveAnimation() {
       if (animState !== 'full' && animState !== 'blooming') return;
-      if (continueBtn) continueBtn.classList.remove('visible');
+      if (continueBtn) {
+        continueBtn.classList.remove('visible');
+        continueBtn.style.opacity = '0';
+        continueBtn.style.pointerEvents = 'none';
+      }
+
+      const cardOverlay = screen.querySelector('.bloom-card-overlay');
+      if (cardOverlay) {
+        cardOverlay.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+        cardOverlay.style.opacity = '0';
+        cardOverlay.style.transform = 'translateY(-20px)';
+      }
+      const lyricBox = screen.querySelector('.bloom-lyric-box');
+      if (lyricBox) {
+        lyricBox.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+        lyricBox.style.opacity = '0';
+        lyricBox.style.transform = 'translateY(20px)';
+      }
+
       dissolveStartTime = performance.now();
       animState = 'dissolving';
     }
