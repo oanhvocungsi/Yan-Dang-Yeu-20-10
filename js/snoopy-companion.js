@@ -4,11 +4,11 @@
  * ══════════════════════════════════════════════════════════════════════════
  *
  * Diễn hoạt 3D Snoopy từ hình ảnh gốc được người dùng cung cấp:
- * 1. "này em gì ơi"       -> Snoopy Hiii (vẫy 2 ngón) [snoopy-hi.png]
- * 2. "Đệ guộc của bạn N"  -> Snoopy chỉ ngón tay vào mình [snoopy-point.png]
+ * 1. "này cậu gì ơi"       -> Snoopy Hiii (vẫy 2 ngón) [snoopy-hi.png]
+ * 2. "tớ là tâm trí của bạn N" -> Snoopy chỉ ngón tay vào mình [snoopy-point.png]
  * 3. "chờ xíu ..."        -> Snoopy stopp (giơ biển STOP) [snoopy-stop.png]
  * 4. "được rồi bấm đi ạ"  -> Snoopy chỉ vào chữ bấm đi [snoopy-point.png]
- * 5. "ui em đẹp quá"      -> Snoopy ngại ngùng (đỏ mặt /// \\\) [snoopy-blush.png]
+ * 5. "ui cậu đẹp quá"     -> Snoopy ngại ngùng (đỏ mặt /// \\\) [snoopy-blush.png]
  *
  * Sau đó: Thu nhỏ mượt mà lên góc trên bên trái màn hình đứng múa đến hết!
  * Tại Cảnh ảnh 1 (smile-stage): 1 Snoopy trên góc trái múa + 1 Snoopy tặng hoa "FOR YOU"
@@ -21,9 +21,9 @@
     { text: "Love you! 💕", icon: "💖" },
     { text: "20/10 thật vui nha! 🌸", icon: "💐" },
     { text: "Hehe đáng yêu quá! ✨", icon: "⭐" },
-    { text: "Tặng bạn nè! 🎁", icon: "🎀" },
+    { text: "Tặng cậu nè! 🎁", icon: "🎀" },
     { text: "Mãi mỉm cười nhé! 🐾", icon: "🐾" },
-    { text: "Bạn tuyệt nhất luôn! 💖", icon: "🌟" }
+    { text: "Cậu tuyệt nhất luôn! 💖", icon: "🌟" }
   ];
 
   let currentBubbleTimeout = null;
@@ -45,8 +45,8 @@
         <!-- 1. Hiii: Vẫy 2 ngón tay -->
         <img src="assets/image/snoopy-hi.png" alt="Snoopy Hii" class="snoopy-pose-img pose-1 active" id="snoopy-pose-1">
 
-        <!-- 2. Đệ guộc bạn N: Chỉ tay tự hào -->
-        <img src="assets/image/snoopy-point.png" alt="Snoopy Đệ guộc bạn N" class="snoopy-pose-img pose-2" id="snoopy-pose-2">
+        <!-- 2. Tâm trí bạn N: Chỉ tay tự hào -->
+        <img src="assets/image/snoopy-point.png" alt="Snoopy tâm trí của bạn N" class="snoopy-pose-img pose-2" id="snoopy-pose-2">
 
         <!-- 3. Stopp: Giơ bàn tay STOP từ từ -->
         <img src="assets/image/snoopy-stop.png" alt="Snoopy STOP" class="snoopy-pose-img pose-3" id="snoopy-pose-3">
@@ -145,7 +145,7 @@
           break;
         case 5:
           badgeIcon.textContent = '🌸';
-          badgeText.textContent = 'Ui bạn đẹp quá... 💕';
+          badgeText.textContent = 'Ui cậu đẹp quá... 💕';
           break;
       }
     }
@@ -245,7 +245,7 @@
         setSnoopyPose(1);
       }
 
-      // Khi chuyển sang cảnh sau "ui em đẹp quá" (từ text-5 trở đi hoặc khi text-4 đã tắt)
+      // Khi chuyển sang cảnh sau "ui cậu đẹp quá" (từ text-5 trở đi hoặc khi text-4 đã tắt)
       if (text5 && text5.classList.contains('hien-thi')) {
         shrinkSnoopyToCorner();
       }
