@@ -7068,6 +7068,8 @@ const defaultPhotoUrls = [
   new URL("../assets/image/photo1.png", import.meta.url).href,
   new URL("../assets/image/photo2.png", import.meta.url).href,
   new URL("../assets/image/photo3.png", import.meta.url).href,
+  new URL("../assets/image/photo4.png", import.meta.url).href,
+  new URL("../assets/image/photo5.png", import.meta.url).href,
 ];
 function PhotoRainItem({ url, startX: e, startZ: t, speed: i, offsetY: s, seed: r, baseSize = 8.5 }) {
   const n = M.useRef();

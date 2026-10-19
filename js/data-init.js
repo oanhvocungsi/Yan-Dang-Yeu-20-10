@@ -61,17 +61,20 @@ const DEFAULT_IMAGES = [
   'assets/image/photo1.png',
   'assets/image/photo2.png',
   'assets/image/photo3.png',
+  'assets/image/photo4.png',
+  'assets/image/photo5.png',
 ];
 
 /* ── Dữ liệu mặc định (fallback khi không có server) ────── */
 const DEFAULT = {
   title:        'Chúc Mừng Ngày 20/10 🌸',
   music:        '',
-  popupMessage: '💖 Gửi em — Cảm ơn em vì đã luôn kiên cường, đáng yêu và dịu dàng. Mong rằng hôm nay và cả những ngày sau, cuộc sống sẽ luôn dành tặng em những điều ngọt ngào nhất, bình yên nhất và ngập tràn nụ cười rạng rỡ! Chúc em ngày 20/10 thật tuyệt vời nhé! 🌸✨',
+  popupMessage: '💖 Gửi cậu — Cảm ơn cậu vì đã luôn là một người bạn tuyệt vời, đáng yêu và chân thành. Mong rằng hôm nay và cả những ngày sau, cuộc sống sẽ luôn dành tặng cậu những điều ngọt ngào nhất, bình yên nhất và ngập tràn nụ cười rạng rỡ! Chúc cậu ngày 20/10 thật tuyệt vời nhé! 🌸✨',
   messages: [
-    'Gửi đến em — cô gái dịu dàng và ấm áp nhất 💖',
-    'Mong thế giới này luôn đối đãi với em thật dịu dàng 🌸',
-    'Ngày 20/10 thật an yên, rạng rỡ và ngập tràn yêu thương nhé 💕'
+    'Gửi cậu — người bạn vô cùng đáng yêu và đặc biệt của tớ ✨',
+    'Chúc cậu ngày 20/10 ngập tràn niềm vui và luôn tươi cười nhé 🌸',
+    'Mong thế giới luôn dịu dàng với cậu, nụ cười rạng rỡ luôn nở trên môi ☀️',
+    'Cảm ơn vì đã luôn là một người bạn tuyệt vời mang lại năng lượng tích cực 💖'
   ],
   images:   DEFAULT_IMAGES,
 };

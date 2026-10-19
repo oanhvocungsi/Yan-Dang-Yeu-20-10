@@ -64,7 +64,7 @@ function P() {
     const h = document.createElement("canvas");
     ((h.id = "effects-overlay"),
         (h.style.cssText =
-            "\n        position: fixed;\n        top: 0;\n        left: 0;\n        width: 100%;\n        height: 100%;\n        pointer-events: none;\n        z-index: 2;\n    "),
+            "\n        position: fixed;\n        top: 0;\n        left: 0;\n        width: 100%;\n        height: 100%;\n        pointer-events: none;\n        z-index: 1005;\n    "),
         document.body.appendChild(h),
         (e = new t.Scene()),
         (n = new t.PerspectiveCamera(
@@ -206,6 +206,11 @@ function P() {
         W(1),
         H(),
         window.addEventListener("resize", L),
+        window.addEventListener("pointerdown", () => {
+            if (A > 0 && !v && Date.now() - A > 900 && typeof window.__advanceParticleMsg === "function") {
+                window.__advanceParticleMsg(Date.now());
+            }
+        }),
         console.log("Enhanced effects initialized with particle text"));
 }
 function z() {
@@ -220,9 +225,10 @@ function z() {
         (x = window.dataChristmasTree.data.messages),
         (x && 0 !== x.length) ||
         (x = [
-            "Gửi đến em — cô gái dịu dàng và ấm áp nhất 💖",
-            "Mong thế giới này luôn đối đãi với em thật dịu dàng 🌸",
-            "Ngày 20/10 thật an yên, rạng rỡ và ngập tràn yêu thương nhé 💕"
+            "Gửi cậu — người bạn vô cùng đáng yêu và đặc biệt của tớ ✨",
+            "Chúc cậu ngày 20/10 ngập tràn niềm vui và luôn tươi cười nhé 🌸",
+            "Mong thế giới luôn dịu dàng với cậu, nụ cười rạng rỡ luôn nở trên môi ☀️",
+            "Cảm ơn vì đã luôn là một người bạn tuyệt vời mang lại năng lượng tích cực 💖"
         ]));
     const t = () => {
         (F(x[0]), (A = Date.now()));
@@ -456,16 +462,29 @@ function H() {
                     window.dispatchEvent(new CustomEvent("textMessagesComplete")),
                     console.log("Particle explosion done - showing sphere"));
         }
-        if (A > 0 && !v && r - A > T)
-            if ((C++, C < x.length)) (F(x[C]), (A = r));
-            else {
-                ((v = !0), (B = !0), (S = r));
-                for (let t = 0; t < w.particleCount; t++)
-                    ((b[3 * t] = 300 * (Math.random() - 0.5)),
-                        (b[3 * t + 1] = 300 * (Math.random() - 0.5)),
-                        (b[3 * t + 2] = 300 * (Math.random() - 0.5)));
-                console.log("All text messages displayed - exploding particles");
+        function advanceMsg(timeNow) {
+            if (A > 0 && !v) {
+                C++;
+                if (C < x.length) {
+                    F(x[C]);
+                    A = timeNow || r;
+                } else {
+                    v = !0;
+                    B = !0;
+                    S = timeNow || r;
+                    for (let t = 0; t < w.particleCount; t++) {
+                        b[3 * t] = 300 * (Math.random() - 0.5);
+                        b[3 * t + 1] = 300 * (Math.random() - 0.5);
+                        b[3 * t + 2] = 300 * (Math.random() - 0.5);
+                    }
+                    console.log("All text messages displayed - exploding particles");
+                }
             }
+        }
+        window.__advanceParticleMsg = advanceMsg;
+        if (A > 0 && !v && r - A > T) {
+            advanceMsg(r);
+        }
     }
     if (a) {
         const e = a.geometry.attributes.position.array;

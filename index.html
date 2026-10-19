@@ -12164,7 +12164,7 @@ if(window.TINY_PERF && !window.TINY_PERF.mobile){
 
     <div
       id="app"
-      data-page='{"component": "views/home", "props": {"errors": {}, "name": "LoveGift", "quote": {"message": "Mong thế giới này luôn dịu dàng với cậu, như cách cậu mang ấm áp đến mọi người.", "author": "Gửi Cậu Với Cả Yêu Thương 💕"}, "message": "", "client": {"fontName": "Mali", "color": "#ff6b9d", "messages": ["Chúc cậu một đời an yên, bốn mùa đều có người chở che và yêu thương 🌸", "Hãy luôn tự tin, tự yêu và tự tỏa sáng theo cách riêng của cậu nhé ✨", "Nụ cười của cậu là điều đẹp đẽ nhất, hãy giữ nó mãi trên môi nhé ☀️", "20/10 ngập tràn niềm vui, mong mọi điều ước của cậu đều thành hiện thực 💖"], "music": "assets/music/giai-cuu-the-gioi.mp3", "images": ["assets/image/photo1.png", "assets/image/photo2.png", "assets/image/photo3.png"]}, "clientId": "/"}, "url": "/", "version": "", "clearHistory": false, "encryptHistory": false}'
+      data-page='{"component": "views/home", "props": {"errors": {}, "name": "LoveGift", "quote": {"message": "Mong thế giới này luôn dịu dàng với cậu, như cách cậu mang lại niềm vui và sự ấm áp đến mọi người.", "author": "Gửi Cậu — Người Bạn Đáng Yêu Của Tớ 💕"}, "message": "", "client": {"fontName": "Mali", "color": "#ff6b9d", "messages": ["Chúc cậu một ngày 20/10 thật nhiều niềm vui và luôn tươi cười, rạng rỡ nhé 🌸", "Hãy luôn tự tin, yêu đời và tỏa sáng theo cách đặc biệt nhất của riêng cậu ✨", "Nụ cười của cậu rất dễ thương, mong cậu luôn giữ trọn nét hồn nhiên ấy ☀️", "Dù học tập hay cuộc sống có bận rộn, cũng nhớ luôn vui vẻ và chăm sóc bản thân nha 💖"], "music": "assets/music/giai-cuu-the-gioi.mp3", "images": ["assets/image/photo1.png", "assets/image/photo2.png", "assets/image/photo3.png", "assets/image/photo4.png", "assets/image/photo5.png"]}, "clientId": "/"}, "url": "/", "version": "", "clearHistory": false, "encryptHistory": false}'
     ></div>
   </div><!-- /#love-rain-screen -->
 
@@ -12258,7 +12258,10 @@ if(window.TINY_PERF && !window.TINY_PERF.mobile){
         }
 
         const effOverlay = document.getElementById('effects-overlay');
-        if (effOverlay) effOverlay.style.display = 'block';
+        if (effOverlay) {
+          effOverlay.style.display = 'block';
+          effOverlay.style.zIndex = '1005';
+        }
 
         // 4. Giữ nguyên nhạc đoạn đầu, không phát nhạc sau
         window.__introAudio = document.getElementById('tiny-soundtrack');
@@ -12287,142 +12290,7 @@ if(window.TINY_PERF && !window.TINY_PERF.mobile){
       }, 1000);
     }
 
-    // =========================================================================
-    // HÀM KHỞI TẠO MASTER ANIMATION: DREAMY PINK FLORAL WONDERLAND
-    // Ảnh 3: Bó hoa bung nở trung tâm + chữ "CHỜ ANH CHÚT THÔI, MÙA ĐÔNG VỪA SANG"
-    // Ảnh 2: Thảm hoa rực rỡ lộng lẫy bung nở lấp đầy toàn màn hình chuẩn 60fps
-    // =========================================================================
-        // =========================================================================
-    // HÀM KHỞI TẠO RE-ANIMATED BLOOMING FLORA & CALENDAR 20/10 (TIKTOK 3)
-    // =========================================================================
-    window.startBloomingBouquetScene = function (onComplete) {
-      const screen = document.getElementById('blooming-bouquet-screen');
-      const canvas = document.getElementById('petals-canvas');
-      const nextBtn = document.getElementById('bouquet-next-btn');
-      const twinklesContainer = document.getElementById('bloom-twinkles');
-
-      if (!screen || !canvas) {
-        if (typeof onComplete === 'function') onComplete();
-        return;
-      }
-
-      // Generate starry twinkles in background
-      if (twinklesContainer && twinklesContainer.children.length === 0) {
-        for (let i = 0; i < 45; i++) {
-          const star = document.createElement('div');
-          star.className = 'star-twinkle';
-          const size = 2 + Math.random() * 4;
-          star.style.width = size + 'px';
-          star.style.height = size + 'px';
-          star.style.left = (Math.random() * 100) + '%';
-          star.style.top = (Math.random() * 100) + '%';
-          star.style.animationDelay = (Math.random() * 2.5) + 's';
-          twinklesContainer.appendChild(star);
-        }
-      }
-
-      screen.style.transition = 'opacity 1.2s ease';
-      screen.style.opacity = '0';
-      screen.style.display = 'flex';
-      void screen.offsetWidth;
-      screen.classList.add('active');
-      screen.style.opacity = '1';
-
-      // Canvas Petals Physics
-      const ctx = canvas.getContext('2d');
-      function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-
-      const petals = [];
-      const isMobile = window.innerWidth <= 600;
-      const PETAL_COUNT = isMobile ? 24 : 40;
-      const PETAL_COLORS = ['#fecdd3', '#fda4af', '#fbcfe8', '#fff1f2', '#ffe4e6', '#f43f5e'];
-      for (let i = 0; i < PETAL_COUNT; i++) {
-        petals.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: 11 + Math.random() * 16,
-          speedY: 0.9 + Math.random() * 1.5,
-          speedX: (Math.random() - 0.5) * 0.9,
-          angle: Math.random() * Math.PI * 2,
-          angularSpeed: (Math.random() - 0.5) * 0.035,
-          alpha: 0.35 + Math.random() * 0.55,
-          color: PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)]
-        });
-      }
-
-      function drawPetal(p) {
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.angle);
-        ctx.globalAlpha = p.alpha;
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.moveTo(0, -p.size);
-        ctx.bezierCurveTo(p.size * 0.8, -p.size * 0.6, p.size * 0.8, p.size * 0.6, 0, p.size);
-        ctx.bezierCurveTo(-p.size * 0.8, p.size * 0.6, -p.size * 0.8, -p.size * 0.6, 0, -p.size);
-        ctx.fill();
-        ctx.restore();
-      }
-
-      let petalsRaf = null;
-      function animPetals() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        petals.forEach(p => {
-          p.y += p.speedY;
-          p.x += p.speedX + Math.sin(p.y * 0.015) * 0.6;
-          p.angle += p.angularSpeed;
-          if (p.y > canvas.height + 40) {
-            p.y = -30;
-            p.x = Math.random() * canvas.width;
-          }
-          drawPetal(p);
-        });
-        petalsRaf = requestAnimationFrame(animPetals);
-      }
-      petalsRaf = requestAnimationFrame(animPetals);
-
-      // Finish Scene and transition to Falling Love 3D Experience
-      let isFinished = false;
-      function finishScene() {
-        if (isFinished) return;
-        isFinished = true;
-
-        screen.style.transition = 'opacity 1.2s ease';
-        screen.style.opacity = '0';
-
-        setTimeout(() => {
-          screen.classList.remove('active');
-          screen.style.display = 'none';
-          if (petalsRaf) cancelAnimationFrame(petalsRaf);
-          window.removeEventListener('resize', resizeCanvas);
-
-          if (typeof onComplete === 'function') onComplete();
-        }, 1250);
-      }
-
-      if (nextBtn) {
-        nextBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          finishScene();
-        });
-      }
-
-      screen.addEventListener('click', (e) => {
-        if (nextBtn && nextBtn.style.opacity === '1') {
-          finishScene();
-        }
-      });
-
-      // Tự động chuyển tiếp sau 9.5 giây nếu người dùng muốn thư thả ngắm hoa
-      setTimeout(() => {
-        finishScene();
-      }, 9500);
-    };
+    // Master flower bloom animation is loaded and managed by js/master-bloom.js
   </script>
 
   <!-- Falling Love Core Modules -->
@@ -12439,6 +12307,8 @@ if(window.TINY_PERF && !window.TINY_PERF.mobile){
     window.addEventListener('textMessagesComplete', async function () {
       var intro    = document.getElementById('intro-screen');
       var loveRain = document.getElementById('love-rain-screen');
+      var effOverlay = document.getElementById('effects-overlay');
+      if (effOverlay) effOverlay.style.display = 'none';
 
       LoadingScreen.show('Đang chuẩn bị điều bất ngờ 💕', 'Đang kết nối dữ liệu...');
       LoadingScreen.setProgress(15);
@@ -12461,7 +12331,9 @@ if(window.TINY_PERF && !window.TINY_PERF.mobile){
         var defaultPhotos = [
           "assets/image/photo1.png",
           "assets/image/photo2.png",
-          "assets/image/photo3.png"
+          "assets/image/photo3.png",
+          "assets/image/photo4.png",
+          "assets/image/photo5.png"
         ];
         var photoUrls = defaultPhotos;
         if (window.LOVEGIFT_IMAGES && window.LOVEGIFT_IMAGES.length > 0) {

@@ -11,7 +11,9 @@
   var defaultPhotos = [
     "assets/image/photo1.png",
     "assets/image/photo2.png",
-    "assets/image/photo3.png"
+    "assets/image/photo3.png",
+    "assets/image/photo4.png",
+    "assets/image/photo5.png"
   ];
 
   if (!window.LOVEGIFT_IMAGES || window.LOVEGIFT_IMAGES.length === 0) {
