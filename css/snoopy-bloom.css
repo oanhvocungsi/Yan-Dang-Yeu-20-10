@@ -11,7 +11,6 @@
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 1.05s ease, border-radius 1.05s ease !important;
 }
 
-/* Khử hoàn toàn các class màu cũ nếu vô tình được gọi */
 #khung-mat .con-mat.sweet-pink,
 #khung-mat .con-mat.joy-gold,
 #khung-mat .con-mat.curious-cyan {
@@ -21,12 +20,14 @@
               inset 0 0 30px rgba(255, 255, 255, 0.95) !important;
 }
 
-/* ── 2. SNOOPY STORYBOARD ACTOR (ĐỨNG BÊN PHẢI, KHÔNG CHE CHỮ) ────────── */
+/* ── 2. SNOOPY STORYBOARD 3D ACTOR (HÌNH ẢNH GỐC TỪ NGƯỜI DÙNG) ───────── */
 #snoopy-storyboard-actor {
   position: fixed;
-  right: clamp(18px, 6vw, 75px);
+  right: clamp(16px, 6vw, 75px);
   bottom: clamp(25px, 6vh, 85px);
   z-index: 45;
+  perspective: 1000px;
+  transform-style: preserve-3d;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,69 +38,96 @@
   -webkit-user-select: none;
 }
 
-#snoopy-storyboard-actor:hover .snoopy-actor-svg-wrap {
-  transform: scale(1.05);
-}
-
-.snoopy-actor-svg-wrap {
+/* Khối bao 3D với hiệu ứng lơ lửng và nghiêng 3D thực tế */
+.snoopy-3d-wrapper {
+  position: relative;
   width: clamp(170px, 20vw, 240px);
   height: auto;
-  position: relative;
-  filter: drop-shadow(0 10px 26px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 18px rgba(255, 140, 200, 0.25));
-  animation: snoopyGentleBreath 3.2s ease-in-out infinite alternate;
-  transition: transform 0.35s ease;
+  transform-style: preserve-3d;
+  animation: snoopy3DFloat 3.8s ease-in-out infinite alternate;
+  transition: transform 0.18s cubic-bezier(0.25, 1, 0.5, 1);
+  filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 20px rgba(255, 160, 210, 0.28));
 }
 
-@keyframes snoopyGentleBreath {
-  0% { transform: translateY(0) rotate(-1deg); }
-  100% { transform: translateY(-7px) rotate(1.5deg); }
+@keyframes snoopy3DFloat {
+  0% {
+    transform: perspective(800px) rotateY(-8deg) rotateX(6deg) translateY(0px) translateZ(15px);
+  }
+  50% {
+    transform: perspective(800px) rotateY(7deg) rotateX(-5deg) translateY(-15px) translateZ(35px);
+  }
+  100% {
+    transform: perspective(800px) rotateY(-8deg) rotateX(6deg) translateY(0px) translateZ(15px);
+  }
 }
 
-/* 5 Tư thế SVG */
-.snoopy-pose {
-  display: none;
+/* Bóng đổ 3D tiếp đất dưới chân nhân vật */
+.snoopy-3d-shadow {
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotateX(75deg);
+  width: 140px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.25) 45%, transparent 70%);
+  filter: blur(8px);
+  pointer-events: none;
+  animation: snoopyShadowPulse 3.8s ease-in-out infinite alternate;
+}
+
+@keyframes snoopyShadowPulse {
+  0% { transform: translateX(-50%) rotateX(75deg) scale(1); opacity: 0.8; }
+  50% { transform: translateX(-50%) rotateX(75deg) scale(0.72); opacity: 0.42; }
+  100% { transform: translateX(-50%) rotateX(75deg) scale(1); opacity: 0.8; }
+}
+
+/* Các hình ảnh tư thế (Hi, Stop, Point, Blush) trích xuất chính xác từ ảnh của bạn */
+.snoopy-pose-img {
   width: 100%;
   height: auto;
-  opacity: 0;
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: none;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
-.snoopy-pose.active {
+.snoopy-pose-img.active {
   display: block;
-  opacity: 1;
-  animation: posePop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: snoopy3DFlip 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes posePop {
-  0% { transform: scale(0.88); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+@keyframes snoopy3DFlip {
+  0% { transform: perspective(800px) rotateY(45deg) scale(0.8) translateZ(-40px); opacity: 0; }
+  100% { transform: perspective(800px) rotateY(0deg) scale(1) translateZ(0); opacity: 1; }
 }
 
-/* Huy hiệu Comic bên cạnh / dưới chân Snoopy */
+/* Huy hiệu Comic 3D nổi phía trước Snoopy */
 .snoopy-story-badge {
-  margin-top: 6px;
+  margin-top: 10px;
+  transform: perspective(600px) translateZ(42px);
   background: rgba(26, 8, 38, 0.94);
-  border: 1.5px solid rgba(255, 182, 218, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255, 182, 218, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 999px;
-  padding: 6px 16px;
+  padding: 7px 18px;
   font-family: 'Quicksand', 'Mali', sans-serif;
-  font-size: clamp(12.5px, 1.4vw, 15px);
+  font-size: clamp(13px, 1.4vw, 15.5px);
   font-weight: 700;
   color: #fff0f7;
-  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
+  box-shadow: 0 6px 22px rgba(244, 63, 94, 0.45);
   white-space: nowrap;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   animation: badgePop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
 }
 
 @keyframes badgePop {
-  0% { transform: translateY(8px) scale(0.85); opacity: 0; }
-  100% { transform: translateY(0) scale(1); opacity: 1; }
+  0% { transform: perspective(600px) translateZ(42px) translateY(8px) scale(0.85); opacity: 0; }
+  100% { transform: perspective(600px) translateZ(42px) translateY(0) scale(1); opacity: 1; }
 }
 
 /* ── 3. CHUYỂN CẢNH: THU NHỎ LÊN GÓC TRÁI TRÊN MÀN HÌNH ĐỨNG MÚA ĐẾN HẾT ── */
@@ -113,7 +141,11 @@
   z-index: 999 !important;
 }
 
-#snoopy-storyboard-actor.shrink-to-corner .snoopy-actor-svg-wrap {
+#snoopy-storyboard-actor.shrink-to-corner .snoopy-3d-wrapper {
+  display: none !important;
+}
+
+#snoopy-storyboard-actor.shrink-to-corner .snoopy-3d-shadow {
   display: none !important;
 }
 
@@ -249,6 +281,200 @@
 @keyframes pillPulse {
   0% { transform: scale(0.96); box-shadow: 0 4px 15px rgba(255, 75, 114, 0.4); }
   100% { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 75, 114, 0.7); }
+}
+
+/* ── 5. HOA NỞ TRỰC TIẾP TRONG DOM (#smile-stage) - 100% TRONG SUỐT ───── */
+#smile-stage .kado-flower-direct-host {
+  position: absolute;
+  right: -1%;
+  bottom: -1.5%;
+  width: 28%;
+  height: 78%;
+  pointer-events: none;
+  z-index: 2;
+  background: transparent !important;
+  opacity: 0;
+  transform: translateY(20px) scale(0.93);
+  transform-origin: bottom center;
+  transition: opacity 1.8s ease-out 0.1s, transform 2.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#smile-stage.hien-thi .kado-flower-direct-host {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+.kado-direct-flowers {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: scale(0.9);
+  transform-origin: bottom center;
+  filter: hue-rotate(132deg) saturate(0.91);
+  background: transparent !important;
+}
+
+.flower {
+  position: absolute;
+  bottom: 12%;
+  left: 46%;
+  transform-origin: bottom center;
+  z-index: 5;
+  --fl-speed: 0.75s;
+}
+
+.flower--1 { left: 23%; animation: moving-flower-1 4s ease-in-out infinite alternate; }
+.flower--2 { left: 50%; transform: rotate(18deg); animation: moving-flower-2 4.7s ease-in-out infinite alternate; }
+.flower--3 { left: 72%; transform: rotate(-16deg); animation: moving-flower-3 4.2s ease-in-out infinite alternate; }
+
+.flower__leafs { position: relative; animation: blooming-flower 1.8s backwards; }
+.flower__leafs--1 { animation-delay: 0.6s; }
+.flower__leafs--2 { animation-delay: 0.95s; }
+.flower__leafs--3 { animation-delay: 1.25s; }
+
+.flower__leafs::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -100%);
+  width: 7vmin;
+  height: 7vmin;
+  border-radius: 50%;
+  background: #6bf0ff;
+  filter: blur(7vmin);
+}
+
+.flower__leaf {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 8vmin;
+  height: 11vmin;
+  border-radius: 51% 49% 47% 53% / 44% 45% 55% 69%;
+  background-image: linear-gradient(to top, #54b8aa, #a7ffee);
+  transform-origin: bottom center;
+  opacity: 0.9;
+  box-shadow: inset 0 0 2vmin rgba(255, 255, 255, 0.5);
+}
+
+.flower__leaf--1 { transform: translate(-10%, 1%) rotateY(40deg) rotateX(-50deg); }
+.flower__leaf--2 { transform: translate(-50%, -4%) rotateX(40deg); }
+.flower__leaf--3 { transform: translate(-90%, 0%) rotateY(45deg) rotateX(50deg); }
+.flower__leaf--4 {
+  height: 8vmin;
+  border-radius: 4vmin 10vmin 4vmin 4vmin;
+  transform-origin: bottom left;
+  transform: translate(0, 18%) rotateX(70deg) rotate(-43deg);
+  background: linear-gradient(to top, #39c6d6, #a7ffee);
+  z-index: 1;
+  opacity: 0.8;
+}
+
+.flower__white-circle {
+  position: absolute;
+  left: -3.5vmin;
+  top: -3vmin;
+  width: 9vmin;
+  height: 4vmin;
+  border-radius: 50%;
+  background: #fff;
+}
+.flower__white-circle::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 60%;
+  height: 60%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: linear-gradient(90deg, #ffeb12, #ffce00);
+}
+
+.flower__line {
+  height: 54vmin;
+  width: 1.5vmin;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent, rgba(255, 255, 255, 0.2)),
+              linear-gradient(to top, transparent 8%, #14757a, #39c6d6);
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+  animation: grow-flower-tree 2.8s backwards;
+}
+.flower--1 .flower__line { height: 65vmin; animation-delay: 0.35s; }
+.flower--2 .flower__line { height: 53vmin; animation-delay: 0.55s; }
+.flower--3 .flower__line { height: 58vmin; animation-delay: 0.75s; }
+
+.flower__line__leaf {
+  --w: 7vmin;
+  --h: calc(var(--w) + 2vmin);
+  position: absolute;
+  top: 20%;
+  left: 90%;
+  width: var(--w);
+  height: var(--h);
+  border-top-right-radius: var(--h);
+  border-bottom-left-radius: var(--h);
+  background: linear-gradient(to top, rgba(20, 117, 122, 0.4), #39c6d6);
+}
+.flower__line__leaf--1 { transform: rotate(70deg) rotateY(30deg); animation: blooming-leaf-right var(--fl-speed) 1.6s backwards; }
+.flower__line__leaf--2 { top: 45%; transform: rotate(70deg) rotateY(30deg); animation: blooming-leaf-right var(--fl-speed) 1.9s backwards; }
+.flower__line__leaf--3, .flower__line__leaf--4, .flower__line__leaf--6 {
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: var(--h);
+  border-bottom-right-radius: var(--h);
+  left: -460%;
+  top: 12%;
+  transform: rotate(-70deg) rotateY(30deg);
+  animation: blooming-leaf-left var(--fl-speed) 1.45s backwards;
+}
+.flower__line__leaf--4 { top: 40%; animation-delay: 1.85s; }
+.flower__line__leaf--5 { top: 0; transform-origin: left; transform: rotate(70deg) rotateY(30deg) scale(0.6); animation: blooming-leaf-right var(--fl-speed) 2.05s backwards; }
+.flower__line__leaf--6 { top: -2%; left: -450%; transform-origin: right; transform: rotate(-70deg) rotateY(30deg) scale(0.6); animation-delay: 2.2s; }
+
+.flower__light {
+  position: absolute;
+  bottom: 0;
+  width: 1vmin;
+  height: 1vmin;
+  border-radius: 50%;
+  background: #fffb00;
+  filter: blur(0.2vmin);
+  animation: light-ans 3.8s linear infinite backwards;
+}
+.flower__light:nth-child(odd) { background: #23f0ff; }
+.flower__light--1 { left: -2vmin; animation-delay: 1s; }
+.flower__light--2 { left: 3vmin; animation-delay: 0.5s; }
+.flower__light--3 { left: -6vmin; animation-delay: 0.3s; }
+.flower__light--4 { left: 6vmin; animation-delay: 0.9s; }
+.flower__light--5 { left: -1vmin; animation-delay: 1.5s; }
+.flower__light--6 { left: -4vmin; animation-delay: 3s; }
+.flower__light--7 { left: 3vmin; animation-delay: 2s; }
+.flower__light--8 { left: -6vmin; animation-delay: 3.5s; }
+
+.kado-grass {
+  position: absolute;
+  bottom: 8%;
+  width: 100%;
+  height: 18%;
+  pointer-events: none;
+  opacity: 0.52;
+  background: repeating-linear-gradient(105deg, transparent 0 18px, rgba(82, 219, 198, 0.12) 19px 21px, transparent 22px 36px);
+  mask-image: linear-gradient(0deg, black, transparent 90%);
+  -webkit-mask-image: linear-gradient(0deg, black, transparent 90%);
+}
+
+@keyframes blooming-flower { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes grow-flower-tree { from { height: 0; opacity: 0.2; } }
+@keyframes blooming-leaf-left { from { transform: rotate(-70deg) rotateY(30deg) scale(0); } }
+@keyframes blooming-leaf-right { from { transform: rotate(70deg) rotateY(30deg) scale(0); } }
+@keyframes moving-flower-1 { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+@keyframes moving-flower-2 { from { transform: rotate(13deg); } to { transform: rotate(22deg); } }
+@keyframes moving-flower-3 { from { transform: rotate(-20deg); } to { transform: rotate(-11deg); } }
+@keyframes light-ans {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(0.7); }
+  35% { opacity: 0.9; }
+  75% { opacity: 0.35; transform: translateY(-13vmin) translateX(7vmin) scale(1.2); }
 }
 
 /* Hạt icon bay lên khi bấm */
