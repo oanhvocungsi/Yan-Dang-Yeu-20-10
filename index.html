@@ -316,9 +316,9 @@ window.TINY_PERF = (() => {
         }
 
         #text-1 { top: 50%; transform: translateY(-50%); font-size: 4rem; }
-        #text-2 { bottom: 15%; font-size: 3rem; }
+        #text-2 { top: 13.5%; font-size: 3rem; }
         #text-3 { top: 15%; font-size: 2.5rem; }
-        #text-4 { bottom: 15%; font-size: 3.5rem; }
+        #text-4 { top: 13.5%; font-size: 3.5rem; }
         #text-5 { top: 10%; left: 0; width: 66%; font-size: 2.4rem; color: #ffb6c1; text-shadow: 0 0 15px #ff69b4; line-height: 1.35; }
         #text-5 .chu-20-10 { display: block; }
         #text-5 .chu-20-10:last-child { margin-top: .08em; }
@@ -683,9 +683,9 @@ window.TINY_PERF = (() => {
         @media (max-width: 600px) {
             .text-layer { padding: 0 12px; box-sizing: border-box; letter-spacing: 2px; }
             #text-1 { font-size: 2.2rem; }
-            #text-2 { font-size: 2rem; }
+            #text-2 { font-size: 2rem; top: 12.5%; bottom: auto; }
             #text-3 { font-size: 1.5rem; }
-            #text-4 { font-size: 2rem; }
+            #text-4 { font-size: 2rem; top: 12.5%; bottom: auto; }
             #text-5 { top: 11%; width: 100%; font-size: 1.5rem; line-height: 1.42; }
             #text-6 { font-size: 1.8rem; }
             #text-7 { font-size: 1.45rem; }
@@ -3614,9 +3614,9 @@ body.luck-scene #khung-mat { z-index: 6; }
         overflow-wrap: break-word;
     }
     #text-1 { font-size: clamp(26px, 7.6vw, 38px); }
-    #text-2 { font-size: clamp(24px, 7vw, 33px); bottom: 13%; }
+    #text-2 { font-size: clamp(17px, 5.1vw, 26px); top: 12.5%; bottom: auto; white-space: nowrap; }
     #text-3 { font-size: clamp(20px, 5.6vw, 27px); top: 9%; }
-    #text-4 { font-size: clamp(24px, 7.2vw, 34px); bottom: 11%; }
+    #text-4 { font-size: clamp(24px, 7.2vw, 34px); top: 12.5%; bottom: auto; }
     #text-5 { top: 6.5%; left: 0; width: 100%; font-size: clamp(19px, 5.6vw, 27px); }
     #text-6 { top: 9%; font-size: clamp(23px, 6.2vw, 32px); }
     #text-7 { top: 7.5%; font-size: clamp(20px, 5.5vw, 27px); }
@@ -3752,7 +3752,7 @@ body.luck-scene #khung-mat { z-index: 6; }
 @media screen and (orientation: landscape) and (max-height: 600px) and (pointer: coarse) {
     .text-layer { box-sizing: border-box; padding: 0 14px; letter-spacing: 1.4px; }
     #text-1 { font-size: clamp(28px, 5.4vh, 42px); }
-    #text-2, #text-4 { font-size: clamp(24px, 5vh, 34px); bottom: 6%; }
+    #text-2, #text-4 { font-size: clamp(24px, 5vh, 34px); top: 8%; bottom: auto; }
     #text-3, #text-5, #text-6, #text-7 { font-size: clamp(19px, 4.8vh, 28px); top: 5%; }
     #text-5 { width: 57%; }
     #text-8, #text-9 { font-size: clamp(20px, 5.6vh, 28px); top: 4%; }
