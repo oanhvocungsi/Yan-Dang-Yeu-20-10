@@ -21,9 +21,9 @@
     { text: "Love you! 💕", icon: "💖" },
     { text: "20/10 thật vui nha! 🌸", icon: "💐" },
     { text: "Hehe đáng yêu quá! ✨", icon: "⭐" },
-    { text: "Tặng em nè! 🎁", icon: "🎀" },
+    { text: "Tặng bạn nè! 🎁", icon: "🎀" },
     { text: "Mãi mỉm cười nhé! 🐾", icon: "🐾" },
-    { text: "Cậu tuyệt nhất luôn! 💖", icon: "🌟" }
+    { text: "Bạn tuyệt nhất luôn! 💖", icon: "🌟" }
   ];
 
   let currentBubbleTimeout = null;
@@ -145,7 +145,7 @@
           break;
         case 5:
           badgeIcon.textContent = '🌸';
-          badgeText.textContent = 'Ui em đẹp quá... 💕';
+          badgeText.textContent = 'Ui bạn đẹp quá... 💕';
           break;
       }
     }
