@@ -1,0 +1,7 @@
+site1.html
+site2.html
+_tools/
+*.py
+*.js
+!js/
+!lib/
